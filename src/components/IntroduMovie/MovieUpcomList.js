@@ -20,7 +20,7 @@ function MovieUpcomList({ upcomingItemList }) {
       <ul className="pl-0 scroll overflow-y-auto h-[550px] pb-4">
         {upcomingItemList ? (
           <li className="border-b border-solid border-borderItemWhiteColor h-[120px] rounded-4">
-            <Link to="">
+            <Link to={`/view-detail-film/${upcomingItemList[0]?.id}`}>
               <div
                 className="relative h-full bg-cover bg-center bg-no-repeat rounded-[10px]"
                 style={{
@@ -58,12 +58,13 @@ function MovieUpcomList({ upcomingItemList }) {
             key={item.id}
             className="border-b group border-solid last:border-0  relative border-borderItemWhiteColor first:hidden"
           >
-            <Link to="">
+            <Link to={`/view-detail-film/${item.id}`}>
               <div className="h-full w-full flex relative items-center">
                 <img
                   className="w-[50px] h-[78px] mt-[12px] border border-solid border-primaryTextColor"
                   src={BASE_URL_IMAGE + item.poster_path}
                   alt={item.thumb_url}
+                  title={item.title ? item.title : item.name}
                 />
                 <div className="py-[18px] px-[10px]">
                   <h3 className="text-primaryTextColor m-0 text-[14px] pb-[2px] max-w-[220px] shortNameThreeDotOneLine">
@@ -82,9 +83,6 @@ function MovieUpcomList({ upcomingItemList }) {
                 </div>
               </div>
             </Link>
-            <span className="absolute  group-hover:block hidden top-[50%] right-[20px] bg-textWhiteColor border text-[12px] px-4 rounded-[4px] border-borderImgGrey border-solid">
-              {item.title ? item.title : item.name}
-            </span>
           </li>
         ))}
       </ul>

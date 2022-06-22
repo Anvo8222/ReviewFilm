@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { BsFillMoonFill } from 'react-icons/bs';
 import StarRatings from 'react-star-ratings';
+import { Link } from 'react-router-dom';
 import { settingSlide } from '../../utils/settingSlide';
 import { BASE_URL_IMAGE } from '../../api/apiConfig';
 import { settingRating } from '../../utils/settingRating';
@@ -19,7 +20,12 @@ function Slide({ slideItem }) {
       <div className="border-b-[10px] w-[100%] border-solid border-boderColorLayout">
         <Slider className="mx-6 flex justify-between" {...settingSlide}>
           {slideItem?.map((item) => (
-            <div key={item._id} className="max-h-[250px] max-h[250px] max-w-[210px] zoom relative  m-2">
+            <Link
+              to={`/view-detail-film/${item.id}`}
+              key={item._id}
+              title={item.title ? item.title : item.name}
+              className="max-h-[250px] max-h[250px] max-w-[210px] zoom relative  m-2"
+            >
               <div
                 className="p-0 h-[100%] rounded w-[204px] pt-[100%] bg-center bg-cover bg-no-repeat cursor-pointer"
                 style={{ backgroundImage: `url("${BASE_URL_IMAGE}${item.poster_path}")` }}
@@ -35,7 +41,7 @@ function Slide({ slideItem }) {
                   <StarRatings {...settingRating} rating={item.vote_average} />
                 </h3>
               </div>
-            </div>
+            </Link>
           ))}
         </Slider>
       </div>

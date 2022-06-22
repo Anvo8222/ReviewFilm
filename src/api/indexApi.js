@@ -1,12 +1,22 @@
 import {
+  setActionItemList,
   setCartoonItemList,
   setOddItemList,
   setPopularItemList,
+  setTopRatingItemList,
   setTrendingItemList,
   setUpcomingItemList,
 } from '../slice/home';
 import axiosClient from './axiosClient';
-import { popularMovieAPI, trendingMovieAPI, upcomingMovieAPI, cartoonMovieAPI, nowPlayingMovieAPI } from './apiConfig';
+import {
+  popularMovieAPI,
+  trendingMovieAPI,
+  upcomingMovieAPI,
+  cartoonMovieAPI,
+  nowPlayingMovieAPI,
+  topRatingMovieAPI,
+  actionMovieAPI,
+} from './apiConfig';
 
 export function getPopularItemList() {
   return async (dispatch) => {
@@ -54,6 +64,26 @@ export function getOddItemList() {
       .get(nowPlayingMovieAPI)
       .then((response) => {
         dispatch(setOddItemList(response));
+      })
+      .catch((error) => {});
+  };
+}
+export function getTopRatingItemList() {
+  return async (dispatch) => {
+    axiosClient
+      .get(topRatingMovieAPI)
+      .then((response) => {
+        dispatch(setTopRatingItemList(response));
+      })
+      .catch((error) => {});
+  };
+}
+export function getActionItemList() {
+  return async (dispatch) => {
+    axiosClient
+      .get(actionMovieAPI)
+      .then((response) => {
+        dispatch(setActionItemList(response));
       })
       .catch((error) => {});
   };

@@ -21,11 +21,16 @@ function Cartoon({ cartoonMovie }) {
       <div className=" my-[20px] pb-[16px] border-b-[10px] w-[100%] border-solid border-boderColorLayout">
         <Slider className="mx-6 flex justify-between" {...settingSlide}>
           {cartoonMovie?.map((item) => (
-            <Link key={item._id} to="" className="flex flex-col items-center h-[470px] w-full max-h-[470px] relative">
+            <Link
+              key={item._id}
+              to={`/view-detail-film/${item.id}`}
+              className="flex flex-col items-center h-[470px] w-full max-h-[470px] relative"
+            >
               <img
                 className="h-[360px] w-[310px] border-[20px] border-solid border-borderImgGrey"
                 src={BASE_URL_IMAGE + item.poster_path}
                 alt={item.poster_path}
+                title={item.title ? item.title : item.name}
               />
               <div className="bg-backgroundName w-[310px] -mt-[6px]">
                 <h3 className="text-[18px] pt-[8px] px-[8px] text-primaryTextColor m-0 leading-[20px] shortNameThreeDotOneLine">

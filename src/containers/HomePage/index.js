@@ -13,9 +13,11 @@ import TopViewMovie from '../../components/TopViewMovie';
 import ActionMovie from '../../components/ActionMovie';
 import Footer from '../../components/Footer';
 import {
+  getActionItemList,
   getCartoonItemList,
   getOddItemList,
   getPopularItemList,
+  getTopRatingItemList,
   getTrendingItemList,
   getUpcomingItemList,
 } from '../../api/indexApi';
@@ -27,6 +29,8 @@ function HomePage(props) {
   const upcomingItemList = useSelector((state) => state.homeItem.upcomingItemList);
   const cartoonItemList = useSelector((state) => state.homeItem.cartoonItemList);
   const oddItemList = useSelector((state) => state.homeItem.oddItemList);
+  const topRatingItemList = useSelector((state) => state.homeItem.topRatingItemList);
+  const actionItemList = useSelector((state) => state.homeItem.actionItemList);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -35,6 +39,8 @@ function HomePage(props) {
     dispatch(getUpcomingItemList());
     dispatch(getCartoonItemList());
     dispatch(getOddItemList());
+    dispatch(getTopRatingItemList());
+    dispatch(getActionItemList());
   }, []);
   return (
     <>
@@ -48,11 +54,11 @@ function HomePage(props) {
           false
         )}
         {cartoonItemList ? <CartoonMovie cartoonMovie={cartoonItemList?.results} /> : false}
-        <div className="flex flex-row gap-4 border-b-[10px] w-[100%] border-solid border-boderColorLayout">
+        <div className="flex flex-row md:block sm:block gap-4 border-b-[10px] w-[100%] border-solid border-boderColorLayout">
           {oddItemList ? <OddMovie oddMovie={oddItemList.results} /> : false}
-          {indexItem?.itemsTopWeek ? <TopViewMovie topViewMovie={indexItem?.itemsTopWeek} /> : false}
+          {topRatingItemList ? <TopViewMovie topViewMovie={topRatingItemList?.results} /> : false}
         </div>
-        {/* {actionMovieList.items ? <ActionMovie actionMovieList={actionMovieList} /> : false} */}
+        {actionItemList ? <ActionMovie actionMovieList={actionItemList?.results} /> : false}
         <Footer />
       </div>
     </>
